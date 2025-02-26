@@ -1,0 +1,21 @@
+on:
+  push:
+    branches: [ "main"]
+
+jobs:
+  create_relase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Create Release
+        id: create_release
+        uses: felixblz/create-release@2d3bdb09fcae2df6dd4495e83fdd59d37748694c
+        with:
+          tag_name: v0.1.1.
+          release_name: Release v$0.1.1
+          body: |
+            `docker pull ghcr.io/${{ github.repository }}:latest`
+          draft: false
+          prerelease: false
+          generateReleaseNotes: true
